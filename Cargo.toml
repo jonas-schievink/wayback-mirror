@@ -1,0 +1,57 @@
+[package]
+name = "wayback-mirror"
+version = "0.0.0"
+authors = ["Jonas Schievink <jonasschievink@gmail.com>"]
+edition = "2018"
+description = "Wayback Machine downloader / mirroring tool"
+documentation = "https://docs.rs/wayback-mirror/"
+repository = "https://github.com/jonas-schievink/wayback-mirror.git"
+keywords = ["internet", "archive", "backup", "clone", "archival"]
+categories = ["command-line-utilities"]
+readme = "README.md"
+license = "0BSD"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+async-std = { version = "1", features = ["attributes"] }
+futures = "0.3.14"
+serde_json = "1.0.64"
+structopt = "0.3.21"
+indicatif = "0.16.0"
+log = "0.4.14"
+
+[dependencies.surf]
+version = "2.2.0"
+default-features = false
+features = ["h1-client-rustls", "encoding"]
+
+# cargo-release configuration
+[package.metadata.release]
+tag-message = "{{version}}"
+no-dev-version = true
+pre-release-commit-message = "Release {{version}}"
+
+# Change the changelog's `Unreleased` section to refer to this release and
+# prepend a new `Unreleased` section
+[[package.metadata.release.pre-release-replacements]]
+file    = "CHANGELOG.md"
+search  = "## Unreleased\n"
+replace = """
+## Unreleased
+
+No changes.
+
+## [{{version}} - {{date}}](https://github.com/jonas-schievink/wayback-mirror/releases/tag/v{{version}})
+"""
+
+# Bump the version inside the example manifest in `README.md`
+[[package.metadata.release.pre-release-replacements]]
+file    = "README.md"
+search  = 'wayback-mirror = "[a-z0-9\\.-]+"'
+replace = 'wayback-mirror = "{{version}}"'
+
+# Bump the version referenced by the `html_root_url` attribute in `lib.rs`
+[[package.metadata.release.pre-release-replacements]]
+file    = "src/lib.rs"
+search  = "https://docs.rs/wayback-mirror/[a-z0-9\\.-]+"
+replace = "https://docs.rs/wayback-mirror/{{version}}"
