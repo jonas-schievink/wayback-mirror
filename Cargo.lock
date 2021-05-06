@@ -1817,7 +1817,7 @@ checksum = "d9a543ae66aa233d14bb765ed9af4a33e81b8b58d1584cf1b47ff8cd0b9e4489"
 
 [[package]]
 name = "wayback-mirror"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "async-std",
  "futures",
