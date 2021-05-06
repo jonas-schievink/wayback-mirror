@@ -43,15 +43,3 @@ No changes.
 
 ## [{{version}} - {{date}}](https://github.com/jonas-schievink/wayback-mirror/releases/tag/v{{version}})
 """
-
-# Bump the version inside the example manifest in `README.md`
-[[package.metadata.release.pre-release-replacements]]
-file    = "README.md"
-search  = 'wayback-mirror = "[a-z0-9\\.-]+"'
-replace = 'wayback-mirror = "{{version}}"'
-
-# Bump the version referenced by the `html_root_url` attribute in `lib.rs`
-[[package.metadata.release.pre-release-replacements]]
-file    = "src/lib.rs"
-search  = "https://docs.rs/wayback-mirror/[a-z0-9\\.-]+"
-replace = "https://docs.rs/wayback-mirror/{{version}}"
